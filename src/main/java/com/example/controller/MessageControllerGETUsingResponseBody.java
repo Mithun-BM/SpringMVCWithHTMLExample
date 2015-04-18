@@ -86,7 +86,7 @@ public class MessageControllerGETUsingResponseBody
 	@ResponseBody//JSON response is sent as JSON object using @ResponseBody and no need to parse in UI using var responsedata= $.parseJSON(html);.
 	public String getMessageReturningJSONResponseSecondWay() throws JsonGenerationException, JsonMappingException, IOException 
 	{
-		logger.info("Inside getMessageReturningJSONResponseSecondWay");
+		logger.info("Inside getMessageReturningJSONResponseSecondWay()");
 		String responseMessage = "Hello World Returned Using JSON Response Second Way";
 		JSONObject jobj = new JSONObject();
 		try {
@@ -94,7 +94,7 @@ public class MessageControllerGETUsingResponseBody
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		logger.info("Exiting getMessageReturningJSONResponseSecondWay");
+		logger.info("Exiting getMessageReturningJSONResponseSecondWay()");
 		return jobj.toString();//Eventhough I say jobj.toString() in UI I get response as JSON object and not JSON string.
 
 
