@@ -1,0 +1,888 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>SpringMVCWithHTMLExample Login Page</title>
+<script src="jquery-2.1.1.min.js"></script>
+<!-- Downloaded jquery location -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+<!--Alternative 1 - ajax.googleapis.com - Google Hosted Libraries jquery -->
+<!-- <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script> -->
+<!--Alternative 2 - code.jquery.com -->
+<!-- <script src="sample.js"></script>  -->
+<!-- Specifying external java script location  -->
+<!-- <link rel="stylesheet" type="text/css" href="sample.css"> -->
+<!-- Specifying external css location  -->
+</head>
+<body>
+	<input type="button" value="HelloWorldController1 GET Message"
+		onclick="helloWorldController1GET()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="button" value="HelloWorldController1 POST Message"
+		onclick="helloWorldController1POST()" />
+	<br />
+	<br />
+	<input type="button" value="HelloWorldController2 GET Message"
+		onclick="helloWorldController2GET()" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="button" value="HelloWorldController2 POST Message"
+		onclick="helloWorldController2POST()" />
+	<br />
+	<br />
+	<input type="button" value="HelloWorldController3 GET Message"
+		onclick="helloWorldController3GET()" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="button" value="HelloWorldController3 POST Message"
+		onclick="helloWorldController3POST()" />
+	<br />
+	<br />
+	<input type="button" value="HelloWorldController4 GET Message"
+		onclick="helloWorldController4GET()" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="button" value="HelloWorldController4 POST Message"
+		onclick="helloWorldController4POST()" />
+	<br />
+	<br />
+	<input type="button" value="GET Message Returning String"
+		onclick="getMessageReturningString()" />
+	<br />
+	<br />
+	<input type="button"
+		value="GET Message Returning JSON Response 1st way"
+		onclick="getMessageReturningJSONResponseFirstWay()" />
+	<br />
+	<br />
+	<input type="button" value="GET Message Returning JSONResponse 2st way"
+		onclick="getMessageReturningJSONResponseSecondWay()" />
+	<br />
+	<br />
+	<input type="button"
+		value="GET Message Returning JSONResponseUsingDataBinding"
+		onclick="getMessageJSONResponseUsingDataBinding()" />
+	<br />
+	<br />
+	<input type="button"
+		value="GET Message List Returning JSONResponseUsingDataBinding"
+		onclick="getMessageListJSONResponseUsingDataBinding()" />
+	<br />
+	<br />
+	<input type="button" value="GET Message Returning XMLResponse"
+		onclick="getMessageReturningXMLResponse()" />
+	<br />
+	<br />
+	<input type="button" value="PathVariableDemo"
+		onclick="pathVariableDemo()" />
+	<br />
+	<br />
+	<input type="button" value="RequestParamDemo"
+		onclick="requestParamDemo()" />
+	<br />
+	<br />
+	<input type="button" value="RequestParamValidationDemo"
+		onclick="requestParamValidationDemo()" />
+	<br />
+	<br />
+	<input type="button" value="POST simple string Message"
+		onclick="postStringData()" />
+	<br />
+	<br />
+	<input type="button" value="POST JSON Message" onclick="postJSONData()" />
+	<br />
+	<br />
+	<input type="button" value="POST JSON Message List"
+		onclick="postJSONListData()" />
+	<br />
+	<br />
+	<input type="button" value="POST XML Message" onclick="postXMLData()" />
+	<br />
+	<br />
+	<input type="button" value="POST XML Message List"
+		onclick="postXMLListData()" />
+	<br />
+	<br />
+	<div id="mydiv"></div>
+	<ul id="myUnOrderedList"></ul>
+	<ol id="myOrderedList"></ol>
+	<table id="myTable" cellpadding="20" cellspacing="30">
+	</table>
+</body>
+<script>
+	function refreshOutputPageDisplay() {
+		$('#mydiv').html("");
+		$('#myUnOrderedList').html("");
+		$('#myOrderedList').html("");
+		$('#myTable').html("");
+	}
+	function helloWorldController1GET() {
+		debugger;
+		$
+				.ajax({
+					type : "GET",
+					url : "SpringMVCWithHTMLExample/helloWorldMessage1/getHelloMessage",
+					dataType : "text",
+					async : true,
+					success : function(html) {
+						console
+								.log("Inside helloWorldController1GET() success callback");
+						refreshOutputPageDisplay();
+						$("#mydiv").html(html);
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside helloWorldController1GET() errror callback");
+						console.log(jqXHR + "  " + textStatus + "  "
+								+ errorThrown);
+					},
+					complete : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside helloWorldController1GET() complete callback");
+					}
+				});
+	}
+
+	function helloWorldController1POST() {
+		debugger;
+		$
+				.ajax({
+					type : "POST",
+					url : "SpringMVCWithHTMLExample/helloWorldMessage1/postHelloMessage",
+					dataType : "text",
+					async : true,
+					success : function(html) {
+						console
+								.log("Inside helloWorldController1POST() success callback");
+						refreshOutputPageDisplay();
+						$("#mydiv").html(html);
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside helloWorldController1POST() errror callback");
+						console.log(jqXHR + "  " + textStatus + "  "
+								+ errorThrown);
+					},
+					complete : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside helloWorldController1POST() complete callback");
+					}
+				});
+	}
+
+	function helloWorldController2GET() {
+		debugger;
+		$
+				.ajax({
+					type : "GET",
+					url : "SpringMVCWithHTMLExample/helloWorldMessage2",
+					dataType : "text",
+					async : true,
+					success : function(html) {
+						console
+								.log("Inside helloWorldController2GET() success callback");
+						refreshOutputPageDisplay();
+						$("#mydiv").html(html);
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside helloWorldController2GET() errror callback");
+						console.log(jqXHR + "  " + textStatus + "  "
+								+ errorThrown);
+					},
+					complete : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside helloWorldController2GET() complete callback");
+					}
+				});
+	}
+
+	function helloWorldController2POST() {
+		debugger;
+		$
+				.ajax({
+					type : "POST",
+					url : "SpringMVCWithHTMLExample/helloWorldMessage2",
+					dataType : "text",
+					async : true,
+					success : function(html) {
+						console
+								.log("Inside helloWorldController2POST() success callback");
+						refreshOutputPageDisplay();
+						$("#mydiv").html(html);
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside helloWorldController2POST() errror callback");
+						console.log(jqXHR + "  " + textStatus + "  "
+								+ errorThrown);
+					},
+					complete : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside helloWorldController2POST() complete callback");
+					}
+				});
+	}
+
+	function helloWorldController3GET() {
+		debugger;
+		$
+				.ajax({
+					type : "GET",
+					url : "SpringMVCWithHTMLExample/getHelloMessage",
+					dataType : "text",
+					async : true,
+					success : function(html) {
+						console
+								.log("Inside helloWorldController3GET() success callback");
+						refreshOutputPageDisplay();
+						$("#mydiv").html(html);
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside helloWorldController3GET() errror callback");
+						console.log(jqXHR + "  " + textStatus + "  "
+								+ errorThrown);
+					},
+					complete : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside helloWorldController3GET() complete callback");
+					}
+				});
+	}
+
+	function helloWorldController3POST() {
+		debugger;
+		$
+				.ajax({
+					type : "POST",
+					url : "SpringMVCWithHTMLExample/postHelloMessage",
+					dataType : "text",
+					async : true,
+					success : function(html) {
+						console
+								.log("Inside helloWorldController3POST() success callback");
+						refreshOutputPageDisplay();
+						$("#mydiv").html(html);
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside helloWorldController3POST() errror callback");
+						console.log(jqXHR + "  " + textStatus + "  "
+								+ errorThrown);
+					},
+					complete : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside helloWorldController3POST() complete callback");
+					}
+				});
+	}
+
+	function helloWorldController4GET() {
+		debugger;
+		$
+				.ajax({
+					type : "GET",
+					url : "SpringMVCWithHTMLExample/helloWorldMessage4/getHelloMessage",
+					dataType : "text",
+					async : true,
+					success : function(html) {
+
+						console
+								.log("Inside helloWorldController4GET() success callback");
+						refreshOutputPageDisplay();
+						$("#mydiv").html(html);
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+
+						console
+								.log("Inside helloWorldController4GET() errror callback");
+						console.log(jqXHR + "  " + textStatus + "  "
+								+ errorThrown);
+					},
+					complete : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside helloWorldController4GET() complete callback");
+
+					}
+				});
+	}
+
+	function helloWorldController4POST() {
+		debugger;
+		$
+				.ajax({
+					type : "POST",
+					url : "SpringMVCWithHTMLExample/helloWorldMessage4/postHelloMessage",
+					dataType : "text",
+					async : true,
+					success : function(html) {
+
+						console
+								.log("Inside helloWorldController4POST() success callback");
+						refreshOutputPageDisplay();
+						$("#mydiv").html(html);
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+
+						console
+								.log("Inside helloWorldController4POST() errror callback");
+						console.log(jqXHR + "  " + textStatus + "  "
+								+ errorThrown);
+					},
+					complete : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside helloWorldController4POST() complete callback");
+
+					}
+				});
+	}
+
+	function getMessageReturningString() {
+		debugger;
+		$
+				.ajax({
+					type : "GET",
+					url : "SpringMVCWithHTMLExample/getMessageReturningString",
+					dataType : "text",
+					async : true,
+					success : function(html) {
+
+						console
+								.log("Inside getMessageReturningString() success callback");
+						var responsedata = html;
+						refreshOutputPageDisplay();
+						$("#mydiv").html(responsedata);
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+
+						console
+								.log("Inside getMessageReturningString() errror callback");
+						console.log(jqXHR + "  " + textStatus + "  "
+								+ errorThrown);
+					},
+					complete : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside getMessageReturningString() complete callback");
+
+					}
+				});
+	}
+
+	function getMessageReturningJSONResponseFirstWay() {
+		debugger;
+		$
+				.ajax({
+					type : "GET",
+					url : "SpringMVCWithHTMLExample/getMessageReturningJSONResponseFirstWay",
+					dataType : "json",
+					async : true,
+					success : function(html) {
+
+						console
+								.log("Inside getMessageReturningJSONResponseFirstWay() success callback");
+						debugger;
+						var responsedata = $.parseJSON(html);
+						refreshOutputPageDisplay();
+						$("#mydiv").html(responsedata.messageContent);
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+
+						console
+								.log("Inside getMessageReturningJSONResponseFirstWay() errror callback");
+						console.log(jqXHR + "  " + textStatus + "  "
+								+ errorThrown);
+					},
+					complete : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside getMessageReturningJSONResponseFirstWay() complete callback");
+
+					}
+				});
+	}
+
+	function getMessageReturningJSONResponseSecondWay() {
+		debugger;
+		$
+				.ajax({
+					type : "GET",
+					url : "SpringMVCWithHTMLExample/getMessageReturningJSONResponseSecondWay",
+					dataType : "json",
+					async : true,
+					success : function(html) {
+
+						console
+								.log("Inside getMessageReturningJSONResponseSecondWay() success callback");
+						debugger;
+						var responsedata = html;
+						refreshOutputPageDisplay();
+						$("#mydiv").html(responsedata.messageContent);
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+
+						console
+								.log("Inside getMessageReturningJSONResponseSecondWay() errror callback");
+						console.log(jqXHR + "  " + textStatus + "  "
+								+ errorThrown);
+					},
+					complete : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside getMessageReturningJSONResponseSecondWay() complete callback");
+
+					}
+				});
+	}
+
+	function getMessageJSONResponseUsingDataBinding() {
+		debugger;
+		$
+				.ajax({
+					type : "GET",
+					url : "SpringMVCWithHTMLExample/getMessageJSONResponseUsingDataBinding",
+					dataType : "json",
+					async : true,
+					success : function(html) {
+						debugger;
+						console
+								.log("Inside getMessageJSONResponseUsingDataBinding() success callback");
+						//Populating JSON response from server into a table. 
+						var responseData = html;
+						refreshOutputPageDisplay();
+						var tr = [];
+						tr
+								.push('<tr><th>MessageId</th><th>MessageContent</th><th>MessageTime</th><th>SubmessageId</th><th>SubmessageContent</th></tr>');
+						tr.push('<tr>');
+						tr.push("<td align='center'>" + responseData.messageId
+								+ "</td>");
+						tr.push("<td align='center'>"
+								+ responseData.messageContent + "</td>");
+						tr.push("<td align='center'>"
+								+ responseData.messageTime + "</td>");
+						tr.push("<td align='center'>"
+								+ responseData.submessage.submessageId
+								+ "</td>");
+						tr.push("<td align='center'>"
+								+ responseData.submessage.submessageContent
+								+ "</td>");
+						tr.push('</tr>');
+
+						$('#myTable').append($(tr.join('')));
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+
+						console
+								.log("Inside getMessageJSONResponseUsingDataBinding() errror callback");
+						console.log(jqXHR + "  " + textStatus + "  "
+								+ errorThrown);
+					},
+					complete : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside getMessageJSONResponseUsingDataBinding() complete callback");
+
+					}
+				});
+	}
+
+	function getMessageListJSONResponseUsingDataBinding() {
+		debugger;
+		$
+				.ajax({
+					type : "GET",
+					url : "SpringMVCWithHTMLExample/getMessageListJSONResponseUsingDataBinding",
+					dataType : "json",
+					async : true,
+					success : function(html) {
+						debugger;
+						console
+								.log("Inside getMessageListJSONResponseUsingDataBinding() success callback");
+						//Populating JSON response from server into a table. 
+						var responseData = html;
+						refreshOutputPageDisplay();
+						var tr = [];
+						tr
+								.push('<tr><th>MessageId</th><th>MessageContent</th><th>MessageTime</th><th>SubmessageId</th><th>SubmessageContent</th></tr>');
+						for (var i = 0; i < responseData.length; i++) {
+							tr.push('<tr>');
+							tr.push("<td align='center'>"
+									+ responseData[i].messageId + "</td>");
+							tr.push("<td align='center'>"
+									+ responseData[i].messageContent + "</td>");
+							tr.push("<td align='center'>"
+									+ responseData[i].messageTime + "</td>");
+							tr.push("<td align='center'>"
+									+ responseData[i].submessage.submessageId
+									+ "</td>");
+							tr
+									.push("<td>"
+											+ responseData[i].submessage.submessageContent
+											+ "</td>");
+							tr.push('</tr>');
+						}
+						$('#myTable').append($(tr.join('')));
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+
+						console
+								.log("Inside getMessageListJSONResponseUsingDataBinding() errror callback");
+						console.log(jqXHR + "  " + textStatus + "  "
+								+ errorThrown);
+					},
+					complete : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside getMessageListJSONResponseUsingDataBinding() complete callback");
+
+					}
+				});
+	}
+
+	function getMessageReturningXMLResponse() {
+		debugger;
+		$
+				.ajax({
+					type : "GET",
+					url : "SpringMVCWithHTMLExample/getMessageReturningXMLResponse",
+					dataType : "xml",
+					async : true,
+					success : function(html) {
+
+						console
+								.log("Inside getMessageReturningXMLResponse() success callback");
+						debugger;
+						var responseData = html;
+						refreshOutputPageDisplay();
+						$("#myTable")
+								.append(
+										'<tr><th>MessageId</th><th>MessageContent</th><th>MessageTime</th><th>SubmessageId</th><th>SubmessageContent</th></tr>');
+						$(responseData)
+								.find('Message')
+								.each(
+										function() {
+											var Col0 = $(this).find('mesageId')
+													.text();
+											var Col1 = $(this).find(
+													'mesageContent').text();
+											var Col2 = $(this).find(
+													'mesageTime').text();
+											var Col3 = $(this).find(
+													'submessageId').text();
+											var Col4 = $(this).find(
+													'submessageContent').text();
+											$("#myTable")
+													.append(
+															'<tr><td align="center">'
+																	+ Col0
+																	+ '</td><td align="center">'
+																	+ Col1
+																	+ '</td><td align="center">'
+																	+ Col2
+																	+ '</td><td align="center">'
+																	+ Col3
+																	+ '</td><td align="center">'
+																	+ Col4
+																	+ '</td></tr>');
+										});
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+
+						console
+								.log("Inside getMessageReturningXMLResponse() errror callback");
+						console.log(jqXHR + "  " + textStatus + "  "
+								+ errorThrown);
+					},
+					complete : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside getMessageReturningXMLResponse() complete callback");
+
+					}
+				});
+	}
+
+	function pathVariableDemo() {
+		debugger;
+		$.ajax({
+			type : "GET",
+			url : "SpringMVCWithHTMLExample/pathVariableDemo/9",
+			dataType : "text",
+			async : true,
+			success : function(html) {
+
+				console.log("Inside pathVariableDemo() success callback");
+				refreshOutputPageDisplay();
+				$("#mydiv").html(html);
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+
+				console.log("Inside pathVariableDemo() errror callback");
+				console.log(jqXHR + "  " + textStatus + "  " + errorThrown);
+			},
+			complete : function(jqXHR, textStatus, errorThrown) {
+				console.log("Inside pathVariableDemo() complete callback");
+
+			}
+		});
+	}
+
+	function requestParamDemo() {
+		debugger;
+		$.ajax({
+			type : "GET",
+			url : "SpringMVCWithHTMLExample/requestParamDemo?date=16-03-2015",
+			dataType : "text",
+			async : true,
+			success : function(html) {
+
+				console.log("Inside requestParamDemo() success callback");
+				refreshOutputPageDisplay();
+				$("#mydiv").html(html);
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+
+				console.log("Inside requestParamDemo() errror callback");
+				console.log(jqXHR + "  " + textStatus + "  " + errorThrown);
+			},
+			complete : function(jqXHR, textStatus, errorThrown) {
+				console.log("Inside requestParamDemo() complete callback");
+
+			}
+		});
+	}
+
+	function requestParamValidationDemo() {
+		debugger;
+		$
+				.ajax({
+					type : "GET",
+					url : "SpringMVCWithHTMLExample/requestParamValidationDemo?date=",
+					dataType : "text",
+					async : true,
+					success : function(html) {
+
+						console
+								.log("Inside requestParamValidationDemo() success callback");
+						refreshOutputPageDisplay();
+						$("#mydiv").html(html);
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+
+						console
+								.log("Inside requestParamValidationDemo() errror callback");
+						console.log(jqXHR + "  " + textStatus + "  "
+								+ errorThrown);
+					},
+					complete : function(jqXHR, textStatus, errorThrown) {
+						console
+								.log("Inside requestParamValidationDemo() complete callback");
+
+					}
+				});
+	}
+
+	function postStringData() {
+		debugger;
+		var msgObj = "String message send from UI";
+
+		$.ajax({
+			type : "POST",
+			url : "SpringMVCWithHTMLExample/postStringData",
+			contentType : "text/plain",
+			dataType : "text",
+			data : msgObj,
+			async : true,
+			success : function(html) {
+				console.log("Inside postStringData() success callback");
+				refreshOutputPageDisplay();
+				$("#mydiv").html(html);
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				console.log("Inside postStringData() errror callback");
+				console.log(jqXHR + "  " + textStatus + "  " + errorThrown);
+			},
+			complete : function(jqXHR, textStatus, errorThrown) {
+				console.log("Inside postStringData() complete callback");
+			}
+		});
+	}
+
+	function postJSONData() {
+		debugger;
+		var messageObj = {
+			"messageContent" : "UI Message Content From Message Obj1",
+			"messageTime" : "UI 16-03-2015",
+			"submessage" : {
+				"submessageId" : 2,
+				"submessageContent" : "UI Sub Message Content From submessage Obj1"
+			},
+			"messageId" : 1
+		};
+
+		$
+				.ajax({
+					type : "POST",
+					url : "SpringMVCWithHTMLExample/postJSONData",
+					contentType : "application/json",
+					dataType : "json",
+					data : JSON.stringify(messageObj),//Very Important send as JSON string and not JSON object.
+					async : true,
+					success : function(html) {
+						console.log("Inside postJSONData() success callback");
+						//Populating JSON response from server into a table. 
+						refreshOutputPageDisplay();
+						var responseData = html;
+						refreshOutputPageDisplay();
+						var tr = [];
+						tr
+								.push('<tr><th>MessageId</th><th>MessageContent</th><th>MessageTime</th><th>SubmessageId</th><th>SubmessageContent</th></tr>');
+						tr.push('<tr>');
+						tr.push("<td align='center'>" + responseData.messageId
+								+ "</td>");
+						tr.push("<td align='center'>"
+								+ responseData.messageContent + "</td>");
+						tr.push("<td align='center'>"
+								+ responseData.messageTime + "</td>");
+						tr.push("<td align='center'>"
+								+ responseData.submessage.submessageId
+								+ "</td>");
+						tr.push("<td align='center'>"
+								+ responseData.submessage.submessageContent
+								+ "</td>");
+						tr.push('</tr>');
+
+						$('#myTable').append($(tr.join('')));
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						console.log("Inside postJSONData() errror callback");
+						console.log(jqXHR + "  " + textStatus + "  "
+								+ errorThrown);
+					},
+					complete : function(jqXHR, textStatus, errorThrown) {
+						console.log("Inside postJSONData() complete callback");
+					}
+				});
+	}
+
+	function postJSONListData() {
+		debugger;
+		var messageListObj = [
+				{
+					"messageContent" : "UI Message Content From Message Obj1",
+					"messageTime" : "UI 16-03-2015",
+					"submessage" : {
+						"submessageId" : 3,
+						"submessageContent" : "UI Sub Message Content From submessage Obj1"
+					},
+					"messageId" : 1
+				},
+				{
+					"messageContent" : "UI Message Content From Message Obj2",
+					"messageTime" : "UI 17-03-2015",
+					"submessage" : {
+						"submessageId" : 4,
+						"submessageContent" : "UI Sub Message Content From submessage Obj2"
+					},
+					"messageId" : 2
+				},
+				{
+					"messageContent" : "UI Message Content From Message Obj3",
+					"messageTime" : "UI 18-03-2015",
+					"submessage" : {
+						"submessageId" : 5,
+						"submessageContent" : "UI Sub Message Content From submessage Obj3"
+					},
+					"messageId" : 3
+				} ];
+
+		$
+				.ajax({
+					type : "POST",
+					url : "SpringMVCWithHTMLExample/postJSONListData",
+					contentType : "application/json",
+					dataType : "json",
+					data : JSON.stringify(messageListObj),
+					async : true,
+					success : function(html) {
+						console.log("Inside postJSONListData() success callback");
+						//Populating JSON response from server into a table. 
+						var responseData = html;
+						refreshOutputPageDisplay();
+						var tr = [];
+						tr
+								.push('<tr><th>MessageId</th><th>MessageContent</th><th>MessageTime</th><th>SubmessageId</th><th>SubmessageContent</th></tr>');
+						for (var i = 0; i < responseData.length; i++) {
+							tr.push('<tr>');
+							tr.push("<td align='center'>"
+									+ responseData[i].messageId + "</td>");
+							tr.push("<td align='center'>"
+									+ responseData[i].messageContent + "</td>");
+							tr.push("<td align='center'>"
+									+ responseData[i].messageTime + "</td>");
+							tr.push("<td align='center'>"
+									+ responseData[i].submessage.submessageId
+									+ "</td>");
+							tr
+									.push("<td>"
+											+ responseData[i].submessage.submessageContent
+											+ "</td>");
+							tr.push('</tr>');
+						}
+						$('#myTable').append($(tr.join('')));
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						console.log("Inside postJSONListData() errror callback");
+						console.log(jqXHR + "  " + textStatus + "  "
+								+ errorThrown);
+					},
+					complete : function(jqXHR, textStatus, errorThrown) {
+						console.log("Inside postJSONListData() complete callback");
+					}
+				});
+	}
+
+	function postXMLData() {
+		debugger;
+		var msgObj = "Message send from UI";
+
+		$.ajax({
+			type : "POST",
+			url : "SpringMVCWithHTMLExample/postXMLData",
+			contentType : "application/xml",
+			dataType : "xml",
+			data : msgObj,
+			async : true,
+			success : function(html) {
+				console.log("Inside postXMLData() success callback");
+				refreshOutputPageDisplay();
+				$("#mydiv").html(html);
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				console.log("Inside postXMLData() errror callback");
+				console.log(jqXHR + "  " + textStatus + "  " + errorThrown);
+			},
+			complete : function(jqXHR, textStatus, errorThrown) {
+				console.log("Inside postXMLData() complete callback");
+			}
+		});
+	}
+
+	function postXMLListData() {
+		debugger;
+		var msgObj = "Message send from UI";
+
+		$.ajax({
+			type : "POST",
+			url : "SpringMVCWithHTMLExample/postXMLListData",
+			contentType : "application/xml",
+			dataType : "xml",
+			data : msgObj,
+			async : true,
+			success : function(html) {
+				console.log("Inside postXMLListData() success callback");
+				refreshOutputPageDisplay();
+				$("#mydiv").html(html);
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				console.log("Inside postXMLListData() errror callback");
+				console.log(jqXHR + "  " + textStatus + "  " + errorThrown);
+			},
+			complete : function(jqXHR, textStatus, errorThrown) {
+				console.log("Inside postXMLListData() complete callback");
+			}
+		});
+	}
+</script>
+</html>
