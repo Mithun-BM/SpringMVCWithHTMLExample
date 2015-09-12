@@ -13,7 +13,9 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,8 +29,7 @@ import com.example.entity.SubMessage;
 public class MessageControllerGETUsingResponseBody 
 {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(MessageControllerGETUsingResponseBody.class);
+	private static final Logger logger = LoggerFactory.getLogger(MessageControllerGETUsingResponseBody.class);
 
 	@RequestMapping(value = "/getMessageReturningString", method = RequestMethod.GET)
 	@ResponseBody//Simple string response is sent using @ResponseBody 
@@ -272,7 +273,7 @@ public class MessageControllerGETUsingResponseBody
 		logger.info("Exiting getMessageReturningXMLResponse()");
 		return responseMessage;*/
 	}
-	
+
 	@RequestMapping(value = "/getMessageListReturningXMLResponse", method = RequestMethod.GET)
 	@ResponseBody//Response is sent using @ResponseBody 
 	public String getMessageListReturningXMLResponse() 
@@ -288,10 +289,11 @@ public class MessageControllerGETUsingResponseBody
 		logger.info("Exiting getMessageListReturningXMLResponse()");
 		return responseMessage;*/
 	}
-	
+
+	//@PathVariable Usage Example
 	@RequestMapping(value = "/pathVariableDemo/{msgId}", method = RequestMethod.GET)
 	@ResponseBody//Response is sent using @ResponseBody 
-	public String pathVariableDemo(@PathVariable("msgId") String msgId) //@PathVariable is equivalent to @PathParam in REST
+	public String pathVariableDemo(@PathVariable("msgId") String msgId) //@PathVariable is equivalent to @PathParam in REST.
 	{
 		logger.info("Inside pathVariableDemo()");
 		System.out.println("MessageId sent as PathVariable is :" + msgId);
@@ -305,9 +307,10 @@ public class MessageControllerGETUsingResponseBody
 		return msgId;*/
 	}
 
+	//@RequestParam Usage Example
 	@RequestMapping(value = "/requestParamDemo", method = RequestMethod.GET)
 	@ResponseBody//Response is sent using @ResponseBody 
-	public String requestParamDemo(@RequestParam("date") String date) //@RequestParam is equivalent to @QueryParam in REST
+	public String requestParamDemo(@RequestParam("date") String date) //@RequestParam is equivalent to @QueryParam in REST.
 	{
 		logger.info("Inside requestParamDemo()");
 		System.out.println("Date sent as RequestParam is :" + date);
@@ -329,5 +332,33 @@ public class MessageControllerGETUsingResponseBody
 		System.out.println("Date sent as RequestParam is :" + date);
 		logger.info("Exiting requestParamValidationDemo()");
 		return date;
+	}
+
+	//@RequestParam Usage Example 2nd Way
+	@RequestMapping(value = "/requestParamDemo2ndWay", method = RequestMethod.GET , params = "date")
+	@ResponseBody//Response is sent using @ResponseBody 
+	public String requestParamDemo2ndWay(@RequestParam("date") String date)
+	{
+		//params = "date"  means date should be sent from UI. If date is missed then it wont hit the controller.
+		logger.info("Inside requestParamDemo2ndWay()");
+		System.out.println("Date sent as RequestParam is :" + date);
+		logger.info("Exiting requestParamDemo2ndWay()");
+		return date;
+	}
+
+	//experiment the below
+	//@RequestParam Usage Example Experiment - Accepting Multiple Parameters from UI
+	@RequestMapping(value = "/requestParamDemoExperiment", method = RequestMethod.GET , params = {"date" , "name" , "age"})
+	@ResponseBody//Response is sent using @ResponseBody 
+	public String requestParamDemoExperiment(@RequestParam("date") String date , @RequestParam("name") String name , @RequestParam("age") String age)
+	{
+		//params = {"date" , "name" , "age"} means all three parameters name, age & date should be sent mandatorily from UI. If any one missed then it wont hit the controller.
+		logger.info("Inside requestParamDemoExperiment()");
+		System.out.println("Date sent as RequestParam is :" + date);
+		System.out.println("Date sent as RequestParam is :" + name);
+		System.out.println("Date sent as RequestParam is :" + age);
+		String returnValue = "Parameter from UI : " + name + date + age;
+		logger.info("Exiting requestParamDemoExperiment()");
+		return returnValue;
 	}
 }
